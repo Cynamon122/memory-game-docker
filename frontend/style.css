@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f9;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    gap: 10px;
+    justify-content: center;
+}
+
+.card {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    cursor: pointer;
+    border-radius: 10px;
+    user-select: none;
+}
+
+.card.revealed {
+    background-color: #fff;
+    pointer-events: none;
+}
+
+#new-game-button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 1rem;
+    background-color: #6c6c6c;
+    color: rgb(215, 215, 215);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#new-game-button:hover {
+    background-color: #8d8d8d;
+}
+
+#message {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+}
