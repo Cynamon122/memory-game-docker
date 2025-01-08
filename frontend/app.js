@@ -1,5 +1,6 @@
 const gameBoard = document.getElementById('game-board');
-const newGameButton = document.getElementById('new-game-button'); // Nowy przycisk
+const newGameButton = document.getElementById('new-game-button'); 
+
 let cards = [];
 let revealedCards = [];
 let matchedCards = [];
@@ -24,6 +25,7 @@ function startNewGame() {
 // Start gry przy pierwszym uruchomieniu
 startNewGame();
 
+// Funkcja renderująca planszę gry
 function renderBoard() {
     gameBoard.innerHTML = '';
     cards.forEach((card, index) => {
@@ -47,12 +49,15 @@ function renderBoard() {
     });
 }
 
+// Funkcja obsługująca odkrywanie karty
 function revealCard(index) {
+    // Ignoruj kliknięcia, jeśli są już odkryte dwie karty lub karta została już odkryta
     if (revealedCards.length === 2 || revealedCards.includes(index)) return;
 
     revealedCards.push(index);
     renderBoard();
 
+    // Jeśli dwie karty zostały odkryte, sprawdź, czy są dopasowane
     if (revealedCards.length === 2) {
         const [first, second] = revealedCards;
         fetch('http://localhost:5000/api/game/check', {
@@ -68,7 +73,7 @@ function revealCard(index) {
             } else {
                 message.innerText = 'Try again!';
             }
-            revealedCards = [];
+            revealedCards = []; // Zresetuj odkryte karty
             setTimeout(() => {
                 message.innerText = '';
                 renderBoard();
