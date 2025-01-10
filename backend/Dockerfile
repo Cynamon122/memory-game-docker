@@ -1,16 +1,20 @@
 FROM python:3.9-slim
 
-# Create app directory
+# Instalacja zależności systemowych
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Ustawienie katalogu roboczego
 WORKDIR /app
 
-# Copy the dependencies file to the working directory
+# Kopiowanie plików projektu
 COPY requirements.txt requirements.txt
+COPY app.py app.py
 
-# Copy the main application file to the working directory
-COPY app.py app.py 
+# Instalacja zależności Python
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Python dependencies from requirements.txt
-RUN pip install -r requirements.txt
-
-# Set the default command to run the application
+# Uruchomienie aplikacji
 CMD ["python", "app.py"]
