@@ -11,7 +11,7 @@ newGameButton.addEventListener('click', startNewGame);
 
 // Funkcja rozpoczynająca nową grę
 function startNewGame() {
-    fetch('http://localhost:5000/api/game/start')
+    fetch('http://localhost:5001/api/game/start')
         .then(response => response.json())
         .then(data => {
             cards = data.cards;
@@ -60,7 +60,7 @@ function revealCard(index) {
     // Jeśli dwie karty zostały odkryte, sprawdź, czy są dopasowane
     if (revealedCards.length === 2) {
         const [first, second] = revealedCards;
-        fetch('http://localhost:5000/api/game/check', {
+        fetch('http://localhost:5001/api/game/check', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ index1: first, index2: second })

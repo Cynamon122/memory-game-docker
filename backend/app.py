@@ -77,4 +77,4 @@ def check_match():
 
 if __name__ == '__main__':
     setup_database()  # Wywołanie funkcji przed uruchomieniem aplikacji
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5001)
