@@ -6,6 +6,10 @@ services:
       - "5001:5000"
     networks:
       - app-network
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
     environment:
       - DATABASE_HOST=db
       - DATABASE_PORT=5432
@@ -32,6 +36,12 @@ services:
       - app-network
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U memory_user -d memory_game"]
+      interval: 5s  # Częstsze sprawdzanie stanu
+      timeout: 5s   # Czas na odpowiedź
+      retries: 10   # Więcej prób
+      start_period: 15s  # Początkowy czas na pełne uruchomienie
 
 networks:
   app-network:
