@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator ciasteczek</title>
+
+    <!-- Manifest dla PWA -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Ikona dla iOS -->
+    <link rel="apple-touch-icon" href="icon-180.png">
+
+    <!-- Kolor tła dla PWA -->
+    <meta name="theme-color" content="#ffcc00">
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(reg => console.log('Service Worker zarejestrowany!', reg))
+                .catch(err => console.log('Błąd rejestracji Service Workera:', err));
+        }
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        input, button { margin: 10px; padding: 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h1>Kalkulator ciasteczek</h1>
+    <p>Podaj liczbę ciasteczek:</p>
+    <input type="number" id="quantity" value="1" min="1">
+    <button onclick="calculate()">Oblicz</button>
+    <h2>Składniki:</h2>
+    <p id="butter"></p>
+    <p id="hempButter"></p>
+    <p id="sugar"></p>
+    <p id="flour"></p>
+
+    <script>
+        function calculate() {
+            let qty = parseInt(document.getElementById('quantity').value);
+            document.getElementById('butter').innerText = `Masło: ${qty * 4}g`;
+            document.getElementById('hempButter').innerText = `Masło konopne: ${qty * 2}g`;
+            document.getElementById('sugar').innerText = `Cukier: ${qty * 1.5}g`;
+            document.getElementById('flour').innerText = `Mąka: ${qty * 7.5}g`;
+        }
+    </script>
+</body>
+</html>
